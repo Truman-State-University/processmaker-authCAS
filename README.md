@@ -16,3 +16,28 @@ Through this plugin you can integrate CAS with processmaker.
 ## List of files modified in PM
 
 - workflow/engine/methods/login/login.php
+
+## Logout Functionality
+
+- workflow/engine/skinEngine/skinEngine.php
+
+Look for $logout variable which is where user will be redirected after logout. We need to send the user to CAS logout once PM logout occurs.
+
+```
+$logout = 'https://cas.server.com:8443/cas/logout';
+```
+
+Also, in your themes layout.html, add the following code
+
+```
+{literal}
+<script type="text/javascript">
+function logout() {
+  document.cookie = 'PHPSESSID=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+  window.location = 'https://cas.server.com:8443/cas/logout';
+}
+   </script>
+{/literal}
+```
+
+and bind the anchor to click event.

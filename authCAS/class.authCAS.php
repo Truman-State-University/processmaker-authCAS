@@ -68,6 +68,9 @@ class authCASClass extends PMPlugin {
 
             $result = true;
         }
+        else {
+            $result = false;
+        }
 
         return $result;
     }
